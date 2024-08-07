@@ -1,6 +1,6 @@
 streamlit
 streamlit-option-menu
-CustomLLM
+
 aiohappyeyeballs==2.3.2
 aiohttp==3.10.0
 aiosignal==1.3.1

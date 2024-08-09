@@ -4,186 +4,73 @@ from CustomLLM import CustomLLM
 
 llm = CustomLLM()
 
-# Initialize session state for theme if it doesn't exist
-if 'theme' not in st.session_state:
-    st.session_state.theme = 'light'
-
-# Function to switch themes
-def switch_theme():
-    st.session_state.theme = 'dark' if st.session_state.theme == 'light' else 'light'
-
-# Apply CSS styles based on the selected theme
-if st.session_state.theme == 'light':
-    st.markdown("""
-        <style>
-        .main {
-            background-color: #f0f2f6;
-            color: #000;
-            font-family: 'Arial', sans-serif;
-            transition: background 0.3s ease-in-out;
-        }
-        .stTextInput > div > input {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            color: #000;
-            padding: 10px;
-            margin-top: 20px;
-            transition: border-color 0.3s ease-in-out;
-        }
-        .stTextInput > div > input:focus {
-            border-color: #4CAF50;
-        }
-        .stButton button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 24px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease-in-out;
-        }
-        .stButton button:hover {
-            background-color: #45a049;
-        }
-        .stMarkdown h2 {
-            color: #000;
-            text-align: center;
-            margin-top: 40px;
-            font-size: 36px;
-            transition: color 0.3s ease-in-out;
-        }
-        .stMarkdown h2:hover {
-            color: #4CAF50;
-        }
-        .stMarkdown h3 {
-            color: #000;
-            margin-top: 20px;
-        }
-        .stSelectbox div[data-baseweb="select"] > div {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            color: #000;
-            margin-top: 20px;
-        }
-        .stSelectbox div[data-baseweb="select"] > div:focus {
-            border-color: #4CAF50;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 16px;
-            color: #000;
-        }
-        .theme-switch-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            padding: 2px 5px;
-            font-size: 12px;
-            cursor: pointer;
-            background-color: #ddd;
-            border: none;
-            border-radius: 5px;
-        }
-        .theme-switch-button.light {
-            color: #000;
-        }
-        .theme-switch-button.dark {
-            color: #e0e0e0;
-            background-color: #333;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-        <style>
-        .main {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            font-family: 'Arial', sans-serif;
-            transition: background 0.3s ease-in-out;
-        }
-        .stTextInput > div > input {
-            background-color: #2b2b2b;
-            border: 1px solid #555;
-            border-radius: 4px;
-            color: #e0e0e0;
-            padding: 10px;
-            margin-top: 20px;
-            transition: border-color 0.3s ease-in-out;
-        }
-        .stTextInput > div > input:focus {
-            border-color: #4CAF50;
-        }
-        .stButton button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 24px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease-in-out;
-        }
-        .stButton button:hover {
-            background-color: #45a049;
-        }
-        .stMarkdown h2 {
-            color: #e0e0e0;
-            text-align: center;
-            margin-top: 40px;
-            font-size: 36px;
-            transition: color 0.3s ease-in-out;
-        }
-        .stMarkdown h2:hover {
-            color: #4CAF50;
-        }
-        .stMarkdown h3 {
-            color: #e0e0e0;
-            margin-top: 20px;
-        }
-        .stSelectbox div[data-baseweb="select"] > div {
-            background-color: #2b2b2b;
-            border: 1px solid #555;
-            border-radius: 4px;
-            color: #e0e0e0;
-            margin-top: 20px;
-        }
-        .stSelectbox div[data-baseweb="select"] > div:focus {
-            border-color: #4CAF50;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 16px;
-            color: #e0e0e0;
-        }
-        .theme-switch-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            padding: 2px 5px;
-            font-size: 12px;
-            cursor: pointer;
-            background-color: #333;
-            color: #e0e0e0;
-            border: none;
-            border-radius: 5px;
-        }
-        .theme-switch-button.light {
-            color: #333;
-        }
-        .theme-switch-button.dark {
-            color: #e0e0e0;
-            background-color: #333;
-        }
-        </style>
-        """, unsafe_allow_html=True)
+# Apply dark mode CSS styles
+st.markdown("""
+    <style>
+    .main {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+        font-family: 'Arial', sans-serif;
+        transition: background 0.3s ease-in-out;
+    }
+    .stTextInput > div > input {
+        background-color: #2b2b2b;
+        border: 1px solid #555;
+        border-radius: 4px;
+        color: #e0e0e0;
+        padding: 10px;
+        margin-top: 20px;
+        transition: border-color 0.3s ease-in-out;
+    }
+    .stTextInput > div > input:focus {
+        border-color: #4CAF50;
+    }
+    .stButton button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 24px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease-in-out;
+    }
+    .stButton button:hover {
+        background-color: #45a049;
+    }
+    .stMarkdown h2 {
+        color: #e0e0e0;
+        text-align: center;
+        margin-top: 40px;
+        font-size: 36px;
+        transition: color 0.3s ease-in-out;
+    }
+    .stMarkdown h2:hover {
+        color: #4CAF50;
+    }
+    .stMarkdown h3 {
+        color: #e0e0e0;
+        margin-top: 20px;
+    }
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: #2b2b2b;
+        border: 1px solid #555;
+        border-radius: 4px;
+        color: #e0e0e0;
+        margin-top: 20px;
+        transition: border-color 0.3s ease-in-out;
+    }
+    .stSelectbox div[data-baseweb="select"] > div:focus {
+        border-color: #4CAF50;
+    }
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 16px;
+        color: #e0e0e0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # Navigation menu
 selected_page = option_menu(
@@ -193,28 +80,32 @@ selected_page = option_menu(
     menu_icon="cast",  # optional
     default_index=0,  # optional
     orientation="horizontal",
-    
 )
 
-# Add the toggle button at the top right of the page
-button_label = '🌙' if st.session_state.theme == 'light' else '🌞'
+# Add the language selector at the top right of the page
+col1, col2, col3 = st.columns([1, 5, 2])  # Adjust columns to align elements
 
-# Add a container to hold the button and manage its state
-col1, col2 = st.columns([1, 5])  # Adjust columns to align button to the top right
-with col1:
-    if st.button(button_label, key='switch_theme', help="Switch theme", use_container_width=False):
-        switch_theme()
+with col3:
+    language = st.selectbox('', ['English', 'Tamil', 'Spanish', 'French', 'German', 'Italian'], key='language_selector')
 
 if selected_page == "Recipe Generator":
     # Recipe Generator Page
-    st.markdown("<h2>🍽️ Welcome to the Recipe Generator 🍽️</h2>", unsafe_allow_html=True)
+    # Display the image instead of welcome text
+    st.image("recipe_generator_banner.png", use_column_width=True)  # Replace with your image path
+
     st.markdown("### Enter a dish name to get the recipe", unsafe_allow_html=True)
 
-    # Input fields for recipe search, dietary preference, and language
-    selected_option = st.text_input('Enter a dish name to get the recipe:')
-    dietary_options = ['None', 'Vegan', 'Vegetarian', 'Gluten-Free', 'Keto', 'Paleo']
-    selected_dietary_option = st.selectbox('Select dietary preference:', dietary_options)
-    language = st.selectbox('Select language:', ['English', 'Tamil', 'Spanish', 'French', 'German', 'Italian'])
+    # Create columns for dish name input and dietary preference with equal widths
+    col1, col2 = st.columns([3,1])
+
+    with col1:
+        # Input field for recipe search
+        selected_option = st.text_input('Enter a dish name to get the recipe:')
+
+    with col2:
+        # Dietary preference selector aligned with the recipe input box
+        dietary_options = ['None', 'Vegan', 'Vegetarian', 'Gluten-Free', 'Keto', 'Paleo']
+        selected_dietary_option = st.selectbox('Dietary Preference:', dietary_options)
 
     if selected_option:
         with st.spinner('Fetching recipe...'):
